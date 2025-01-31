@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicTacToe</title>
+    <link rel="stylesheet" href="./css/game.css">
+</head>
+<body>
+    <div class="win-screen-bg"></div>
+    <div class="win-screen">
+        <img src="" alt="who_wins" id="winning-icon"> 
+        <p id="win-message"> wins!</p>
+        <p id="draw-message">It's a Draw!</p>
+        <div class="restart-bg" id="restart-button" onclick="goBack()">
+            <h2 class="restart">Play Again?</h2>
+        </div>
+    </div>
+
+    <div class="difficulty-selector">
+        <div class="difficulty">
+            <h3 class="diffi-text">VS Computer</h3>
+            <div class="button easy">
+                Easy
+            </div>
+            <div class="button medium">
+                Medium
+            </div>
+            <div class="button hard">
+                Hard
+            </div>
+        </div>
+    </div>
+
+    <section class="info">
+        <!-- insert image here (tictactoe logo) -->
+        <h1 class="name ComicKids">TicTacToe</h1>
+        <div class="turn-indicator">
+            <div class="turn-message-outer">
+                <div class="turn-message-inner">
+                    <img src="./images/ekis.png" alt="icon" class="icon indicator">
+                    <h2>'s turn!</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="main">
+        <div class="board-bg">
+            <div class="board">
+                <div class="a1 space"></div>
+                <div class="a2 space"></div>
+                <div class="a3 space"></div>
+                <div class="b1 space"></div>
+                <div class="b2 space"></div>
+                <div class="b3 space"></div>
+                <div class="c1 space"></div>
+                <div class="c2 space"></div>
+                <div class="c3 space"></div>
+            </div>
+        </div> 
+    </section>
+    
+    <script src="./script/ai.js"></script>
+</body>
+</html>

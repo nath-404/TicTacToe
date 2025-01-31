@@ -1,0 +1,12 @@
+neon pink: #FF10F0
+neon blue: #1F51FF
+Neon Pink	#FF10F0	
+Neon Blue	#1F51FF	
+Light Neon Pink	#FF73FA	
+Deep Neon Pink	#B800A4	
+Light Neon Blue	#73A4FF	
+Deep Neon Blue	#0028A4	
+Neon Green	#10FF73	
+Neon Orange	#FFA31F	
+Gradient Blend Pink	#A85CFF	
+Gradient Blend Blue	#6F87FF

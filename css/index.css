@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'ComicKids';
+    src: url("../fonts/ComicKids.ttf") format("truetype");
+}
+
+body {
+    background: radial-gradient(#1F1F3F, #121212);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    font-family: 'ComicKids';
+}
+
+.title {
+    text-shadow:
+        3px 2px #FF10F0,
+        6px 4px #A85CFF,
+        9px 6px #1F51FF;
+    color: white;
+    margin-bottom: 3rem;
+    font-size: 6rem;
+}
+
+.gamemode {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    height: fit-content;
+    
+    position: relative;
+    background: #181825;
+    padding: 2rem;
+    border-radius: 1.2rem;
+
+    color: white;
+    font-size: 3rem;
+}
+
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+.gamemode::after, .gamemode::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle),#FF10F0, #1F51FF, #FF10F0);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    padding: .6rem;
+    border-radius: 2rem;
+    animation: 3s spin linear infinite;
+}
+.gamemode::before {
+    filter: blur(1.5rem);
+    opacity: 0.5;
+}
+@keyframes spin {
+    from {
+        --angle: 0deg;
+    } to {
+        --angle: 360deg;
+    }
+}
+
+.button {
+    border: #A85CFF .3rem solid;
+    width: 15rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: .7rem;
+    color: white;
+    font-size: 2rem;
+    background: radial-gradient(#6F87FF, #1F51FF, #1F51FF);
+    transition: transform .3s;
+}
+.button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.one-player {
+    margin-bottom: 1.3rem;
+}
+.gm-text {
+    margin-bottom: 2rem;
+}
+
+
+/* for mobile */ 
+@media screen and (max-width : 481px) {
+    .title {
+        font-size: 4rem;
+    }
+    .gamemode {
+        padding: 1.4rem;
+        font-size: 2.1rem;
+    }
+    .button {
+        font-size: 1.5rem;
+        width: 12rem;
+        height: 4rem;
+    }
+    .one-player {
+        margin-bottom: .9rem;
+    }
+    .gamemode::after, .gamemode::before {
+        padding: .6rem;
+    }
+}

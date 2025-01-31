@@ -1,0 +1,316 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'chopic';
+    src: url('../fonts/chopic.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'yaelah';
+    src: url(../fonts/Yaelah.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'thifloss';
+    src: url("../fonts/Thifloss.otf") format("opentype")
+}
+@font-face {
+    font-family: 'ComicKids';
+    src: url("../fonts/ComicKids.ttf") format("truetype");
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: radial-gradient(#1F1F3F, #121212);
+}
+
+.ComicKids {
+    font-family: 'ComicKids';
+}
+.name {
+    font-size: 6rem;
+    color: white;
+    text-shadow:
+        3px 2px #FF10F0,
+        6px 4px #A85CFF,
+        9px 6px #1F51FF;
+}
+
+.info {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1rem;
+    padding-top: 2rem;
+    /* height: 30vh; */
+}
+
+.turn-indicator {
+    height: 100px;
+    width: 90vw;
+    max-width: 450px;
+    /* border: 10px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.turn-message-outer {
+    /* background: linear-gradient(to top left, #FF10F0, #A85CFF, #1F51FF); */
+    padding: .5rem;
+    border-radius: .6rem;
+}
+.turn-message-inner {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    padding: .7rem 1.3rem;
+    border-radius: .4rem;
+}
+.icon {
+    width: 50vw;
+    max-height: 50px;
+    max-width: 50px;
+}
+.turn-message-inner h2 {
+    margin-left: .5rem;
+    font-family: 'yaelah';
+    color: white;
+    font-size: 3.3rem;
+}
+
+.main {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    /* height: 70vh; */
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    aspect-ratio: 1;
+    gap: 10px;
+}
+.board-bg {
+    /* background: linear-gradient(to bottom right, #FF10F0, #A85CFF, #1F51FF); */
+    background-image: url('../images/grid.png');
+    background-size: cover;
+    
+    padding: .7rem;
+    width: 90vw;
+    max-width: 450px;
+}
+
+.space {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #F5F5F5; */
+    aspect-ratio: 1;
+}
+
+.x {
+    background-image: url('../images/ekis.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 1.5rem;
+}
+
+.o {
+    background-image: url('../images/bilog.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 1.5rem;
+}
+
+.win-screen {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    font-size: 7rem;
+    color: white;
+    font-family: "yaelah";
+}
+.win-screen-bg {
+    display: none;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    backdrop-filter: blur(10px);
+}
+#winning-icon {
+    display: none;
+    width: 12rem;
+    height: auto;
+}
+.restart {
+    font-size: 4rem;
+    background: linear-gradient(to top left, #FF10F0, #A85CFF, #1F51FF);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;  
+    padding: 1rem;
+    position: relative;
+}
+.restart-bg {
+    width: fit-content;
+    height: fit-content;
+    background: #1F1F3F;
+    border-radius: 1.5rem;
+    border: #A85CFF .5rem solid;
+    transition: transform .3s;
+}
+.restart-bg:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.difficulty-selector {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+.difficulty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    height: fit-content;
+    
+    position: relative;
+    background: #181825;
+    padding: 2rem;
+    border-radius: 1.2rem;
+
+    color: white;
+    font-size: 3rem;
+    font-family: 'ComicKids';
+}
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+.difficulty::after, .difficulty::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle),#FF10F0, #1F51FF, #FF10F0);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    padding: .7rem;
+    border-radius: 2rem;
+    animation: 3s spin linear infinite;
+}
+.difficulty::before {
+    filter: blur(1.5rem);
+    opacity: 0.5;
+}
+@keyframes spin {
+    from {
+        --angle: 0deg;
+    } to {
+        --angle: 360deg;
+    }
+}
+.button {
+    border: #A85CFF .3rem solid;
+    width: 15rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: .7rem;
+    color: white;
+    font-size: 2rem;
+    background: radial-gradient(#6F87FF, #1F51FF, #1F51FF);
+    transition: transform .3s;
+}
+.button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.diffi-text {
+    margin-bottom: 2rem;
+}
+.easy, .medium {
+    margin-bottom: 1.3rem;
+}
+#draw-message, #win-message {
+    display: none;
+    text-align: center;
+}
+
+@media screen and (max-width : 481px) {
+    .info {
+        margin-top: 4rem;
+    }
+    .name {
+        font-size: 4rem;
+    }
+    .turn-message-inner > h2 {
+        font-size: 2rem;
+    }
+    .turn-message-inner > .icon {
+        width: 2.5rem;
+    }
+    .board-bg {
+        max-width: 80%;
+    }
+    .o, .x {
+        margin: 1rem;
+    }
+
+    #winning-icon {
+        width: 7rem;
+    }
+    #win-message, #draw-message {
+        font-size: 5rem;
+    }
+    #restart-button {
+        max-width: 80%;
+    }
+    .restart {
+        font-size: 2.5rem;
+    }
+    .restart-bg {
+        padding: .4rem;
+    }
+
+    .difficulty {
+        padding: 1.4rem;
+        font-size: 2.1rem;
+    }
+    .button {
+        font-size: 1.5rem;
+        width: 12rem;
+        height: 4rem;
+    }
+    .diffi-text {
+        margin-bottom: 1.5rem;
+    }
+    .difficulty::after, .difficulty::before {
+        padding: .6rem;
+    }
+    .easy, .medium {
+        margin-bottom: .8rem;
+    }
+
+}
