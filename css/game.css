@@ -96,10 +96,8 @@ body {
     gap: 10px;
 }
 .board-bg {
-    /* background: linear-gradient(to bottom right, #FF10F0, #A85CFF, #1F51FF); */
     background-image: url('../images/grid.png');
     background-size: cover;
-    
     padding: .7rem;
     width: 90vw;
     max-width: 450px;
@@ -119,6 +117,8 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     margin: 1.5rem;
+    animation: pop 0.5s ease forwards;
+    z-index: -5;
 }
 
 .o {
@@ -127,6 +127,47 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     margin: 1.5rem;
+    animation: pop 0.5s ease-out forwards;
+    z-index: -5;
+}
+
+@keyframes pop {
+    0% {
+        clip-path: circle(0% at 50% 50%); /* Fully clipped */
+        transform: scale(0); /* Start small */
+    }
+    50% {
+        clip-path: circle(50% at 50% 50%); /* Halfway through the circle wipe */
+        transform: scale(1.2); /* Slightly larger for a "pop" effect */
+    }
+    100% {
+        clip-path: circle(100% at 50% 50%); /* Fully revealed */
+        transform: scale(1); /* Normal size */
+    }
+}
+@keyframes slideTopToBottom {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+@keyframes slideBottomToTop {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+@keyframes slideRightToLeft {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
 
 .win-screen {
@@ -141,6 +182,9 @@ body {
     color: white;
     font-family: "yaelah";
 }
+.win-screen > p {
+    animation: slideRightToLeft 0.5s ease forwards;
+}
 .win-screen-bg {
     display: none;
     height: 100%;
@@ -152,6 +196,7 @@ body {
     display: none;
     width: 12rem;
     height: auto;
+    animation: pop 0.5s ease forwards;
 }
 .restart {
     font-size: 4rem;
@@ -160,6 +205,7 @@ body {
     -webkit-background-clip: text;  
     padding: 1rem;
     position: relative;
+    animation: slideBottomToTop 0.5s ease forwards;
 }
 .restart-bg {
     width: fit-content;
@@ -168,6 +214,7 @@ body {
     border-radius: 1.5rem;
     border: #A85CFF .5rem solid;
     transition: transform .3s;
+    animation: slideBottomToTop 0.5s ease forwards;
 }
 .restart-bg:hover {
     cursor: pointer;
@@ -213,7 +260,7 @@ body {
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-    z-index: -1;
+    z-index: -10;
     padding: .7rem;
     border-radius: 2rem;
     animation: 3s spin linear infinite;

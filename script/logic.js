@@ -107,11 +107,40 @@ function pointChecker(id1, id2, id3) {
 }
 
 function goBack() {
-    history.back();
+    const audio = new Audio("./sound/button.wav");
+    audio.play();
+
+    setTimeout(() => {
+        history.back();
+    }, 250);
 }
 function goToOnePlayer() {
-    window.location.href = "./onePlayer.html";
+    const audio = new Audio("./sound/button.wav");
+    audio.play();
+
+    setTimeout(() => {
+        window.location.href = "./onePlayer.html";
+    }, 250);
 }
 function goToTwoPlayer() {
-    window.location.href = "./twoPlayer.html";
+    const audio = new Audio("./sound/button.wav");
+    audio.play();
+
+    setTimeout(() => {
+        window.location.href = "./twoPlayer.html";
+    }, 250);
+}
+
+function playSound() {
+    let playMe = "";
+    // Create a new Audio object
+    if (whose_turn === 0) {
+        playMe = "./sound/pop1.mp3";
+    } else if (whose_turn === 1) {
+        playMe = "./sound/pop2.mp3";
+    }
+
+    const audio = new Audio(playMe);
+    // Play the sound
+    audio.play();
 }

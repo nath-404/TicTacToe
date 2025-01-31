@@ -15,12 +15,18 @@ difficulty.forEach((button) => {
         } else {
             console.log("no such difficulty exists.")
         }
-        // hide difficulty selector
-        difficulty_selector.style.display = "none";
-        // show play area
-        play_area.forEach((section) => {
-            section.style.display = "flex";
-        });
+
+        const audio = new Audio("./sound/button.wav");
+        audio.play();
+
+        setTimeout(() => {
+            // hide difficulty selector
+            difficulty_selector.style.display = "none";
+            // show play area
+            play_area.forEach((section) => {
+                section.style.display = "flex";
+            });
+        }, 300);
     });
 });
 
@@ -51,27 +57,19 @@ let valueToRemove;
 function handleClick(space) {
     // alternate between x and o
     // player's turn
-    if (whose_turn === 0) {
-        whose_turn = 1;
-        space_taken++;
-        // add class to space depending on the symbol
-        space.classList.add("x"); // class contains the symbol
-        // make user unable to click the space again
-        space.style.pointerEvents = "none";
-        // change indicator
-        indicator.src = "./images/bilog.png";
-        // remove the space from the emptyspaces array
-        valueToRemove = space.classList[0];
-            emptySpaces = emptySpaces.filter(item => item !== valueToRemove);
-    } else {
-        whose_turn = 0;
-        space_taken++;
-        space.classList.add("o");
-        space.style.pointerEvents = "none";
-        indicator.src = "./images/ekis.png";
-        valueToRemove = space.classList[0];
-        emptySpaces = emptySpaces.filter(item => item !== valueToRemove);
-    }
+    whose_turn = 1;
+    space_taken++;
+    // add class to space depending on the symbol
+    space.classList.add("x"); // class contains the symbol
+    playSound();
+    // make user unable to click the space again
+    space.style.pointerEvents = "none";
+    // change indicator
+    indicator.src = "./images/bilog.png";
+    // remove the space from the emptyspaces array
+    valueToRemove = space.classList[0];
+    emptySpaces = emptySpaces.filter(item => item !== valueToRemove);
+    
     // disable click for all spaces with x or o classes
     spaces2.forEach((space) => {
         if (space.classList.contains("x") || space.classList.contains("o")) {
@@ -125,6 +123,7 @@ const winningCombos = [
 ];
 
 function easyAI() {
+    whose_turn = 0;
     // disable click when AI's turn
     spaces2.forEach((space) => {
         space.style.pointerEvents = "none";
@@ -141,25 +140,16 @@ function easyAI() {
     // add the symbol to the chosen space
     const aiChoice = document.getElementsByClassName(`${aiMove}`);
     // set delay for AI's turn
+    
     setTimeout(() => {
-        if (whose_turn === 0) {
-            whose_turn = 1;
-            space_taken++;
-            aiChoice[0].classList.add("x");
-            indicator.src = "./images/bilog.png";
-            aiChoice[0].style.pointerEvents = "none";
-            // remove space in emptyspaces array
-            valueToRemove = aiChoice[0].classList[0];
-            emptySpaces = emptySpaces.filter(item => item !== valueToRemove);
-        } else {
-            whose_turn = 0;
-            space_taken++;
-            aiChoice[0].classList.add("o");
-            indicator.src = "./images/ekis.png";
-            aiChoice[0].style.pointerEvents = "none";
-            valueToRemove = aiChoice[0].classList[0];
-            emptySpaces = emptySpaces.filter(item => item !== valueToRemove);
-        }
+        space_taken++;
+        aiChoice[0].classList.add("o");
+        playSound();
+        indicator.src = "./images/ekis.png";
+        aiChoice[0].style.pointerEvents = "none";
+        valueToRemove = aiChoice[0].classList[0];
+        emptySpaces = emptySpaces.filter(item => item !== valueToRemove);
+        
         // check if ai won
         checkWinner();
 
@@ -173,6 +163,7 @@ function easyAI() {
 }
 
 function mediumAI() {
+    whose_turn = 0;
     // disable click when AI's turn
     spaces2.forEach((space) => {
         space.style.pointerEvents = "none";
@@ -211,24 +202,14 @@ function mediumAI() {
     const aiChoice = document.getElementsByClassName(aiMove);
     // set delay for AI's turn
     setTimeout(() => {
-        if (whose_turn === 0) {
-            whose_turn = 1;
-            space_taken++;
-            aiChoice[0].classList.add("x");
-            indicator.src = "./images/bilog.png";
-            aiChoice[0].style.pointerEvents = "none";
-            // remove space in emptyspaces array
-            valueToRemove = aiChoice[0].classList[0];
-            emptySpaces = emptySpaces.filter(item => item !== valueToRemove);
-        } else {
-            whose_turn = 0;
-            space_taken++;
-            aiChoice[0].classList.add("o");
-            indicator.src = "./images/ekis.png";
-            aiChoice[0].style.pointerEvents = "none";
-            valueToRemove = aiChoice[0].classList[0];
-            emptySpaces = emptySpaces.filter(item => item !== valueToRemove);
-        }
+        space_taken++;
+        aiChoice[0].classList.add("o");
+        playSound();
+        indicator.src = "./images/ekis.png";
+        aiChoice[0].style.pointerEvents = "none";
+        valueToRemove = aiChoice[0].classList[0];
+        emptySpaces = emptySpaces.filter(item => item !== valueToRemove);
+
         // check if ai won
         checkWinner();
 
@@ -242,6 +223,7 @@ function mediumAI() {
 }
 
 function hardAI() {
+    whose_turn = 0;
     // disable click when AI's turn
     spaces2.forEach((space) => {
         space.style.pointerEvents = "none";
@@ -328,24 +310,14 @@ function hardAI() {
     const aiChoice = document.getElementsByClassName(aiMove);
     // set delay for AI's turn
     setTimeout(() => {
-        if (whose_turn === 0) {
-            whose_turn = 1;
-            space_taken++;
-            aiChoice[0].classList.add("x");
-            indicator.src = "./images/bilog.png";
-            aiChoice[0].style.pointerEvents = "none";
-            // remove space in emptyspaces array
-            valueToRemove = aiChoice[0].classList[0];
-            emptySpaces = emptySpaces.filter(item => item !== valueToRemove);
-        } else {
-            whose_turn = 0;
-            space_taken++;
-            aiChoice[0].classList.add("o");
-            indicator.src = "./images/ekis.png";
-            aiChoice[0].style.pointerEvents = "none";
-            valueToRemove = aiChoice[0].classList[0];
-            emptySpaces = emptySpaces.filter(item => item !== valueToRemove);
-        }
+        space_taken++;
+        aiChoice[0].classList.add("o");
+        playSound();
+        indicator.src = "./images/ekis.png";
+        aiChoice[0].style.pointerEvents = "none";
+        valueToRemove = aiChoice[0].classList[0];
+        emptySpaces = emptySpaces.filter(item => item !== valueToRemove);
+        
         // check if ai won
         checkWinner();
 
@@ -475,5 +447,24 @@ function pointChecker(id1, id2, id3) {
 }
 
 function goBack() {
-    history.back();
+    const audio = new Audio("./sound/button.wav");
+    audio.play();
+
+    setTimeout(() => {
+        history.back();
+    }, 250);
+}
+
+function playSound() {
+    let playMe = "";
+    // Create a new Audio object
+    if (whose_turn === 0) {
+        playMe = "./sound/pop1.mp3";
+    } else if (whose_turn === 1) {
+        playMe = "./sound/pop2.mp3";
+    }
+
+    const audio = new Audio(playMe);
+    // Play the sound
+    audio.play();
 }
