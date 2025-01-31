@@ -307,7 +307,7 @@ body {
 
 @media screen and (max-width : 481px) {
     .info {
-        margin-top: 4rem;
+        margin-top: 3rem;
     }
     .name {
         font-size: 4rem;

@@ -100,6 +100,9 @@ function pointChecker(id1, id2, id3) {
         } else {
             winning_icon.src = "./images/bilog_higherres.png";
         }
+        const audio = new Audio("./sound/win.wav");
+        audio.play();
+        
         win_screen_bg[0].style.display = "block";
         win_message.style.display = "block";
         winning_icon.style.display = "block";

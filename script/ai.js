@@ -367,7 +367,6 @@ function attackOrDefend(action) {
 }
 
 // DONT DELETE THIS (requirements for the game)
-
 const win_screen = document.querySelector(".win-screen");
 const win_screen_bg = document.getElementsByClassName("win-screen-bg");
 const winning_icon = document.getElementById("winning-icon");
@@ -407,8 +406,12 @@ function checkWinner() {
         // set winning indicator depending on winning symbol
         if (symbol === "X") {
             winning_icon.src = "./images/ekis_higherres.png";
+            const audio = new Audio("./sound/win.wav");
+            audio.play();
         } else if (symbol === "O") {
             winning_icon.src = "./images/bilog_higherres.png";
+            const audio = new Audio("./sound/lose.wav");
+            audio.play();
         }
         win_screen_bg[0].style.display = "block";
         win_message.style.display = "block";
