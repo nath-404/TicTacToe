@@ -222,6 +222,46 @@ function mediumAI() {
     }, 1000);
 }
 
+function fourEdges() {
+    let random = Math.floor(Math.random() * 4) + 1;
+    switch(random) {
+        case 1:
+            return a2.classList[0];
+            break;
+        case 2:
+            return b1.classList[0];
+            break;
+        case 3:
+            return b3.classList[0];
+            break;
+        case 4:
+            return c2.classList[0];
+            break;
+        default:
+            console.log("Encountered an error.");
+    }
+}
+function fourCorners() {
+    let random = Math.floor(Math.random() * 4) + 1;
+    switch(random) {
+        case 1:
+            return a1.classList[0];
+            break;
+        case 2:
+            return a3.classList[0];
+            break;
+        case 3:
+            return c1.classList[0];
+            break;
+        case 4:
+            return c3.classList[0];
+            break;
+        default:
+            console.log("Encountered an error.");
+    }
+}
+
+let middleTaken;
 function hardAI() {
     whose_turn = 0;
     // disable click when AI's turn
@@ -234,7 +274,6 @@ function hardAI() {
     }
     // start of hard ai thinking
     let aiMove;
-
     // check if middle is occupied. if not, but the symbol there
     if (!b2.classList.contains('x') && !b2.classList.contains('o')) {
         aiMove = b2.classList[0];
@@ -274,34 +313,25 @@ function hardAI() {
                         aiMove = a2.classList[0];
                     } else {
                         console.log('b2 is taken so IT WILL COUNTER');
+                        // if middle is taken, put in one of the corners (c1)
                         if (b2.classList.contains('x') && space_taken === 1) {
-                            let random = Math.floor((Math.random() * 4) + 1)
-                            console.log(random);
-                            switch(random) {
-                                case 1:
-                                    aiMove = a1.classList[0];
-                                    break;
-                                case 2:
-                                    aiMove = a3.classList[0];
-                                    break;
-                                case 3:
-                                    aiMove = c1.classList[0];
-                                    break;
-                                case 4:
-                                    aiMove = c3.classList[0];
-                                    break;
-                                default:
-                                    console.log("Encountered an error");
-                            }
-                        } else if (a1.classList.contains('x') && space_taken === 3) {
-                            aiMove = c1.classList[0];
-                        } else if (c3.classList.contains('x') && space_taken === 3) {
+                            middleTaken = true;
+                            // randomizer for all 4 corners
+                            aiMove = fourCorners();
+                            // counter corners attack
+                        } else if ((a1.classList.contains('x') && middleTaken) && space_taken === 3) {
                             aiMove = a3.classList[0];
-                        } else if (c1.classList.contains('x') && space_taken === 3) {
-                            aiMove = a3.classList[0];
-                        } else if (a3.classList.contains('x') && space_taken === 3) {
-                            console.log(space_taken);
+                        } else if ((a3.classList.contains('x') && middleTaken) && space_taken === 3) {
                             aiMove = c3.classList[0];
+                        } else if ((c3.classList.contains('x') && middleTaken) && space_taken === 3) {
+                            aiMove = c1.classList[0];
+                        } else if ((c1.classList.contains('x') && middleTaken) && space_taken === 3) {
+                            aiMove = a1.classList[0];
+                            // counter diagonal attack
+                        } else if ((a1.classList.contains('x') && c3.classList.contains('x')) && space_taken === 3) {
+                            aiMove = b1.classList[0];
+                        } else if ((a3.classList.contains('x') && c1.classList.contains('x')) && space_taken === 3) {
+                            aiMove = b3.classList[0];
                         } else {
                             console.log("IT WILL RANDOMIZE");
                             let random = Math.floor(Math.random() * emptySpaces.length);
