@@ -294,6 +294,10 @@ body {
     cursor: pointer;
     transform: scale(1.1);
 }
+.button:active {
+    transform: scale(0.95);
+}
+
 .diffi-text {
     margin-bottom: 2rem;
 }
