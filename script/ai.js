@@ -232,7 +232,7 @@ function hardAI() {
     if (disableAI) {
         return;
     }
-    // start of medium ai thinking
+    // start of hard ai thinking
     let aiMove;
 
     // check if middle is occupied. if not, but the symbol there
@@ -275,7 +275,30 @@ function hardAI() {
                     } else {
                         console.log('b2 is taken so IT WILL COUNTER');
                         if (b2.classList.contains('x') && space_taken === 1) {
+                            let random = Math.floor((Math.random() * 4) + 1)
+                            console.log(random);
+                            switch(random) {
+                                case 1:
+                                    aiMove = a1.classList[0];
+                                    break;
+                                case 2:
+                                    aiMove = a3.classList[0];
+                                    break;
+                                case 3:
+                                    aiMove = c1.classList[0];
+                                    break;
+                                case 4:
+                                    aiMove = c3.classList[0];
+                                    break;
+                                default:
+                                    console.log("Encountered an error");
+                            }
+                        } else if (a1.classList.contains('x') && space_taken === 3) {
                             aiMove = c1.classList[0];
+                        } else if (c3.classList.contains('x') && space_taken === 3) {
+                            aiMove = a3.classList[0];
+                        } else if (c1.classList.contains('x') && space_taken === 3) {
+                            aiMove = a3.classList[0];
                         } else if (a3.classList.contains('x') && space_taken === 3) {
                             console.log(space_taken);
                             aiMove = c3.classList[0];
@@ -286,12 +309,6 @@ function hardAI() {
                         }
                     }
                 }
-
-                // a2
-                // b1
-                
-                // c2
-                // b3
             } else {
                 // if defensive approach found, assign that space to aiMove
                 console.log('calculatedChoiceForDefend is ' + calculatedChoiceForDefend);
@@ -304,7 +321,7 @@ function hardAI() {
             aiMove = calculatedChoiceForAttack; 
         }
     }
-    // end of medium ai thinking
+    // end of hard ai thinking
 
     // add the symbol to the chosen space
     const aiChoice = document.getElementsByClassName(aiMove);
@@ -428,6 +445,8 @@ function checkWinner() {
         win_screen_bg[0].style.display = "block";
         win_screen.style.display = "flex";
         draw_message.style.display = "block";
+        const audio = new Audio("./sound/draw.wav");
+        audio.play();
     }
     return;
 }

@@ -183,7 +183,7 @@ body {
     font-family: "yaelah";
 }
 .win-screen > p {
-    animation: slideRightToLeft 0.5s ease forwards;
+    animation: slideTopToBottom 0.5s ease forwards;
 }
 .win-screen-bg {
     display: none;

@@ -69,6 +69,8 @@ function checkWinner() {
         win_screen_bg[0].style.display = "block";
         win_screen.style.display = "flex";
         draw_message.style.display = "block";
+        const audio = new Audio("./sound/draw.wav");
+        audio.play();
     }
 }
 
